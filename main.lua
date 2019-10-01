@@ -6,6 +6,8 @@ place = 4
 
 function love.load()
 
+
+-- Create whole drawable area
   for x = 1, 46 do
 
     map[x] = {}
@@ -21,21 +23,25 @@ function love.load()
 
   end
 
-  local xp = love.math.random(1,45)
-  local yp = love.math.random(1,33)
+  ------------------------
 
-  local xa = love.math.random(4,8)
-  local ya = love.math.random(4,8)
+  local roomStartx = love.math.random(1,45)
+  local roomStarty = love.math.random(1,33)
 
-  local ds
+  local roomWidth = love.math.random(4,8)
+  local roomHeight = love.math.random(4,8)
 
-  for x = 1, xa do
+  local doorSide
 
-    x = x + xp
+  local doorPosition
 
-    for y = 1, ya do
+  for x = 1, roomWidth do
 
-      y = y + yp
+    x = x + roomStartx
+
+    for y = 1, roomHeight do
+
+      y = y + roomStarty
 
       if x <= 46 and x > 0 and y <= 34 and y > 0 then
 
@@ -47,43 +53,61 @@ function love.load()
 
   end
 
-  local w = love.math.random(1,4)
+  doorSide = love.math.random(1,4)
 
-  if w == 1 then
+  debug = doorSide
 
-    ds = love.math.random(0, xa)
+  if doorSide == 1 then
 
-    x = xp + ds
-    y = yp - 1
+    doorPosition = love.math.random(1, roomWidth)
 
-    map[x][y].img = love.graphics.newImage('Tile Door.png')
+    x = roomStartx + doorPosition
+    y = roomStarty
 
-  elseif w == 2 then
+    if x <= 46 and x > 0 and y <= 34 and y > 0 then
 
-    ds = love.math.random(0, ya)
+      map[x][y].img = love.graphics.newImage('Tile Door.png')
 
-    x = xp - 1
-    y = yp + ds
+    end
 
-    map[x][y].img = love.graphics.newImage('Tile Door.png')
+  elseif doorSide == 2 then
 
-  elseif w == 3 then
+    doorPosition = love.math.random(1, roomHeight)
 
-    ds = love.math.random(0, xa)
+    x = roomStartx
+    y = roomStarty + doorPosition
 
-    x = xp + ds
-    y = yp + ya + 1
+    if x <= 46 and x > 0 and y <= 34 and y > 0 then
 
-    map[x][y].img = love.graphics.newImage('Tile Door.png')
+      map[x][y].img = love.graphics.newImage('Tile Door.png')
 
-  elseif w == 4 then
+    end
 
-    ds = love.math.random(0, ya)
+  elseif doorSide == 3 then
 
-    x = xp + xa + 1
-    y = yp + ds
+    doorPosition = love.math.random(1, roomWidth)
 
-    map[x][y].img = love.graphics.newImage('Tile Door.png')
+    x = roomStartx + doorPosition
+    y = roomStarty + roomHeight + 1
+
+    if x <= 46 and x > 0 and y <= 34 and y > 0 then
+
+      map[x][y].img = love.graphics.newImage('Tile Door.png')
+
+    end
+
+  elseif doorSide == 4 then
+
+    doorPosition = love.math.random(1, roomHeight)
+
+    x = roomStartx + roomWidth + 1
+    y = roomStarty + doorPosition
+
+    if x <= 46 and x > 0 and y <= 34 and y > 0 then
+
+      map[x][y].img = love.graphics.newImage('Tile Door.png')
+
+    end
 
   end
 
@@ -102,6 +126,34 @@ function love.draw()
     for y = 1, 34 do
 
       love.graphics.draw(map[x][y].img, map[x][y].x, map[x][y].y, 0, 0.5)
+
+    end
+
+  end
+
+  love.graphics.print(debug, 0, 0)
+
+end
+
+
+function makeRoom()
+
+  roomWidth = love.math.random(4,8)
+  roomHeight = love.math.random(4,8)
+
+  for x = 1, roomWidth do
+
+    x = x + roomStartx
+
+    for y = 1, roomHeight do
+
+      y = y + roomStarty
+
+      if x <= 46 and x > 0 and y <= 34 and y > 0 then
+
+        map[x][y].img = love.graphics.newImage('Tile Floor.png')
+
+      end
 
     end
 
