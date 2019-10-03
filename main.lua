@@ -25,15 +25,15 @@ function love.load()
 
   ------------------------
 
-  local roomStartx = love.math.random(1,45)
-  local roomStarty = love.math.random(1,33)
+  local roomStartx = 0
+  local roomStarty = 6
 
-  local roomWidth = love.math.random(4,8)
-  local roomHeight = love.math.random(4,8)
+  local roomWidth = 5
+  local roomHeight = 5
 
-  local doorSide
+  local doorSide = 1
 
-  local doorPosition
+  local doorPosition = 3
 
   for x = 1, roomWidth do
 
@@ -53,59 +53,31 @@ function love.load()
 
   end
 
-  doorSide = love.math.random(1,4)
+  x = roomStartx + doorPosition
+  y = roomStarty
 
-  debug = doorSide
+  if x <= 46 and x > 0 and y <= 34 and y > 0 then
 
-  if doorSide == 1 then
+    map[x][y].img = love.graphics.newImage('Tile Door.png')
 
-    doorPosition = love.math.random(1, roomWidth)
+  end
 
-    x = roomStartx + doorPosition
-    y = roomStarty
+  roomStartx = x
+  roomStarty = y
 
-    if x <= 46 and x > 0 and y <= 34 and y > 0 then
+  for x = 1, roomWidth do
 
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
+    x = x
 
-    end
+    for y = 1, roomHeight do
 
-  elseif doorSide == 2 then
+      y = roomStarty - y
 
-    doorPosition = love.math.random(1, roomHeight)
+      if x <= 46 and x > 0 and y <= 34 and y > 0 then
 
-    x = roomStartx
-    y = roomStarty + doorPosition
+        map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
-    if x <= 46 and x > 0 and y <= 34 and y > 0 then
-
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
-
-    end
-
-  elseif doorSide == 3 then
-
-    doorPosition = love.math.random(1, roomWidth)
-
-    x = roomStartx + doorPosition
-    y = roomStarty + roomHeight + 1
-
-    if x <= 46 and x > 0 and y <= 34 and y > 0 then
-
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
-
-    end
-
-  elseif doorSide == 4 then
-
-    doorPosition = love.math.random(1, roomHeight)
-
-    x = roomStartx + roomWidth + 1
-    y = roomStarty + doorPosition
-
-    if x <= 46 and x > 0 and y <= 34 and y > 0 then
-
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
+      end
 
     end
 
