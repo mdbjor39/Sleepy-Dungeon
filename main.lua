@@ -37,13 +37,11 @@ function love.load()
 
   local doorPosition
 
-  for x = roomStartx + 1, roomStartx + roomWidth do
+  local roomPosition
 
-    --x = x + roomStartx
+  for x = roomStartx, roomStartx + roomWidth do
 
     for y = roomStarty + 1, roomStarty + roomHeight do
-
-      --y = y + roomStarty
 
       map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
@@ -56,8 +54,6 @@ function love.load()
   --Select side to place door
 
   doorSide = love.math.random(1,1)
-
-  debug = doorSide
 
   ------------------------
 
@@ -74,16 +70,16 @@ function love.load()
     roomWidth = love.math.random(4,8)
     roomHeight = love.math.random(4,8)
 
+    debug = roomWidth
+
     roomStartx = x
     roomStarty = y
 
-    for x = 1, roomWidth do
+    roomPosition = love.math.random(0, roomWidth)
 
-      x = x + roomStartx
+    for x = roomStartx - roomPosition, roomStartx + roomWidth - roomPosition do
 
-      for y = 1, roomHeight do
-
-        y = roomStarty - y
+      for y = roomStarty - roomHeight, roomStarty - 1 do
 
         map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
