@@ -27,8 +27,8 @@ function love.load()
 
   -- Create room
 
-  local roomStartx = love.math.random(45,45)
-  local roomStarty = love.math.random(45,45)
+  local roomStartx = love.math.random(45,81)
+  local roomStarty = love.math.random(45,69)
 
   local roomWidth = love.math.random(4,8)
   local roomHeight = love.math.random(4,8)
@@ -37,13 +37,13 @@ function love.load()
 
   local doorPosition
 
-  for x = 1, roomWidth do
+  for x = roomStartx + 1, roomStartx + roomWidth do
 
-    x = x + roomStartx
+    --x = x + roomStartx
 
-    for y = 1, roomHeight do
+    for y = roomStarty + 1, roomStarty + roomHeight do
 
-      y = y + roomStarty
+      --y = y + roomStarty
 
       map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
@@ -55,7 +55,7 @@ function love.load()
 
   --Select side to place door
 
-  doorSide = love.math.random(1,4)
+  doorSide = love.math.random(1,1)
 
   debug = doorSide
 
@@ -70,6 +70,26 @@ function love.load()
     y = roomStarty
 
     map[x][y].img = love.graphics.newImage('Tile Door.png')
+
+    roomWidth = love.math.random(4,8)
+    roomHeight = love.math.random(4,8)
+
+    roomStartx = x
+    roomStarty = y
+
+    for x = 1, roomWidth do
+
+      x = x + roomStartx
+
+      for y = 1, roomHeight do
+
+        y = roomStarty - y
+
+        map[x][y].img = love.graphics.newImage('Tile Floor.png')
+
+      end
+
+    end
 
   elseif doorSide == 2 then
 
