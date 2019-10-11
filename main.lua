@@ -56,10 +56,11 @@ function love.load()
 
   doorSide = love.math.random(1,4)
 
-  for redo = 1, 2 do
+  debugs = doorSide
+
+  --for redo = 1, 2 do
 
     debug = newDoorSide
-    debugs = doorSide
 
     if doorSide == 1 then
 
@@ -235,7 +236,7 @@ function love.load()
 
     end
 
-  end
+  --end
 
   ------------------------
 
@@ -259,7 +260,7 @@ function love.draw()
 
   end
 
-  love.graphics.print(debug, 10, 0)
+  --love.graphics.print(debug, 10, 0)
   love.graphics.print(debugs, 0, 0)
 
 end
