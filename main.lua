@@ -33,10 +33,13 @@ function love.load()
   local roomWidth = love.math.random(4,8)
   local roomHeight = love.math.random(4,8)
 
-  local doorSide
-  local newDoorSide
+  local xHolder
+  local yHolder
 
-  local doorPosition
+  local FloorSide
+  local newFloorSide
+
+  local FloorPosition
 
   local roomPosition
 
@@ -52,36 +55,39 @@ function love.load()
 
   ------------------------
 
-  --Select side to place door
+  --Select side to place Floor
 
-  doorSide = love.math.random(1,4)
+  FloorSide = love.math.random(1, 4)
 
-  debugs = doorSide
+  debugs = FloorSide
 
-  --for redo = 1, 2 do
+  for redo = 1, 4 do
 
-    debug = newDoorSide
+    debug = newFloorSide
 
-    if doorSide == 1 then
+    if FloorSide == 1 then
 
-      doorPosition = love.math.random(1, roomWidth)
+      FloorPosition = love.math.random(1, roomWidth)
 
-      x = roomStartx + doorPosition
+      x = roomStartx + FloorPosition
       y = roomStarty
 
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
+      map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
       roomWidth = love.math.random(4,8)
       roomHeight = love.math.random(4,8)
 
-      roomStartx = x
-      roomStarty = y
+      xHolder = x
+      yHolder = y
 
       roomPosition = love.math.random(0, roomWidth)
 
-      for x = roomStartx - roomPosition, roomStartx + roomWidth - roomPosition do
+      roomStartx = x - roomPosition
+      roomStarty = y - roomHeight - 1
 
-        for y = roomStarty - roomHeight, roomStarty - 1 do
+      for x = xHolder - roomPosition, xHolder + roomWidth - roomPosition do
+
+        for y = yHolder - roomHeight, yHolder - 1 do
 
           map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
@@ -89,42 +95,45 @@ function love.load()
 
       end
 
-      newDoorSide = love.math.random(1, 3)
+      newFloorSide = love.math.random(1, 3)
 
-      if newDoorSide == 1 then
+      if newFloorSide == 1 then
 
-        doorSide = 1
+        FloorSide = 1
 
-      elseif newDoorSide == 2 then
+      elseif newFloorSide == 2 then
 
-        doorSide = 2
+        FloorSide = 2
 
-      elseif newDoorSide == 3 then
+      elseif newFloorSide == 3 then
 
-        doorSide = 4
+        FloorSide = 4
 
       end
 
-    elseif doorSide == 2 then
+    elseif FloorSide == 2 then
 
-      doorPosition = love.math.random(1, roomHeight)
+      FloorPosition = love.math.random(1, roomHeight)
 
       x = roomStartx - 1
-      y = roomStarty + doorPosition
+      y = roomStarty + FloorPosition
 
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
+      map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
       roomWidth = love.math.random(4,8)
       roomHeight = love.math.random(4,8)
 
-      roomStartx = x
-      roomStarty = y
+      xHolder = x
+      yHolder = y
 
       roomPosition = love.math.random(0, roomHeight)
 
-      for x = roomStartx - roomWidth, roomStartx - 1 do
+      roomStartx = x - roomWidth - 1
+      roomStarty = y - roomPosition
 
-        for y = roomStarty - roomPosition, roomStarty + roomHeight - roomPosition do
+      for x = xHolder - roomWidth - 1, xHolder - 1 do
+
+        for y = yHolder - roomPosition, yHolder + roomHeight - roomPosition do
 
           map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
@@ -132,42 +141,47 @@ function love.load()
 
       end
 
-      newDoorSide = love.math.random(1, 3)
+      newFloorSide = love.math.random(1, 3)
 
-      if newDoorSide == 1 then
+      if newFloorSide == 1 then
 
-        doorSide = 1
+        FloorSide = 1
 
-      elseif newDoorSide == 2 then
+        roomStarty = roomStarty - 1
 
-        doorSide = 2
+      elseif newFloorSide == 2 then
 
-      elseif newDoorSide == 3 then
+        FloorSide = 2
 
-        doorSide = 3
+      elseif newFloorSide == 3 then
+
+        FloorSide = 3
 
       end
 
-    elseif doorSide == 3 then
+    elseif FloorSide == 3 then
 
-      doorPosition = love.math.random(1, roomWidth)
+      FloorPosition = love.math.random(1, roomWidth)
 
-      x = roomStartx + doorPosition
+      x = roomStartx + FloorPosition
       y = roomStarty + roomHeight + 1
 
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
+      map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
       roomWidth = love.math.random(4,8)
       roomHeight = love.math.random(4,8)
 
-      roomStartx = x
-      roomStarty = y
+      xHolder = x
+      yHolder = y
 
       roomPosition = love.math.random(0, roomWidth)
 
-      for x = roomStartx - roomPosition, roomStartx + roomWidth - roomPosition do
+      roomStartx = x - roomPosition
+      roomStarty = y
 
-        for y = roomStarty + 1, roomStarty + roomHeight do
+      for x = xHolder - roomPosition, xHolder + roomWidth - roomPosition do
+
+        for y = yHolder + 1, yHolder + roomHeight do
 
           map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
@@ -175,42 +189,45 @@ function love.load()
 
       end
 
-      newDoorSide = love.math.random(1, 3)
+      newFloorSide = love.math.random(1, 3)
 
-      if newDoorSide == 1 then
+      if newFloorSide == 1 then
 
-        doorSide = 2
+        FloorSide = 2
 
-      elseif newDoorSide == 2 then
+      elseif newFloorSide == 2 then
 
-        doorSide = 3
+        FloorSide = 3
 
-      elseif newDoorSide == 3 then
+      elseif newFloorSide == 3 then
 
-        doorSide = 4
+        FloorSide = 4
 
       end
 
-    elseif doorSide == 4 then
+    elseif FloorSide == 4 then
 
-      doorPosition = love.math.random(1, roomHeight)
+      FloorPosition = love.math.random(1, roomHeight)
 
       x = roomStartx + roomWidth + 1
-      y = roomStarty + doorPosition
+      y = roomStarty + FloorPosition
 
-      map[x][y].img = love.graphics.newImage('Tile Door.png')
+      map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
       roomWidth = love.math.random(4,8)
       roomHeight = love.math.random(4,8)
 
-      roomStartx = x
-      roomStarty = y
+      xHolder = x
+      yHolder = y
 
       roomPosition = love.math.random(0, roomHeight)
 
-      for x = roomStartx + 1, roomStartx + roomWidth do
+      roomStartx = x + 1
+      roomStarty = y - roomPosition
 
-        for y = roomStarty - roomPosition, roomStarty + roomHeight - roomPosition do
+      for x = xHolder + 1, xHolder + roomWidth do
+
+        for y = yHolder - roomPosition, yHolder + roomHeight - roomPosition do
 
           map[x][y].img = love.graphics.newImage('Tile Floor.png')
 
@@ -218,25 +235,26 @@ function love.load()
 
       end
 
-      newDoorSide = love.math.random(1, 3)
+      newFloorSide = love.math.random(1, 3)
 
-      if newDoorSide == 1 then
+      if newFloorSide == 1 then
 
-        doorSide = 1
+        FloorSide = 1
+        roomStarty = roomStarty - 1
 
-      elseif newDoorSide == 2 then
+      elseif newFloorSide == 2 then
 
-        doorSide = 3
+        FloorSide = 3
 
-      elseif newDoorSide == 3 then
+      elseif newFloorSide == 3 then
 
-        doorSide = 4
+        FloorSide = 4
 
       end
 
     end
 
-  --end
+  end
 
   ------------------------
 
@@ -260,7 +278,7 @@ function love.draw()
 
   end
 
-  --love.graphics.print(debug, 10, 0)
+  love.graphics.print(debug, 10, 0)
   love.graphics.print(debugs, 0, 0)
 
 end
