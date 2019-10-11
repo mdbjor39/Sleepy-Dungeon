@@ -59,11 +59,7 @@ function love.load()
 
   FloorSide = love.math.random(1, 4)
 
-  debugs = FloorSide
-
   for redo = 1, 4 do
-
-    debug = newFloorSide
 
     if FloorSide == 1 then
 
@@ -277,8 +273,5 @@ function love.draw()
     end
 
   end
-
-  love.graphics.print(debug, 10, 0)
-  love.graphics.print(debugs, 0, 0)
 
 end
